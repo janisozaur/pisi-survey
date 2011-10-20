@@ -1,0 +1,28 @@
+<h1>Survey#new</h1>
+<p>Find me in app/views/survey/new.html.erb</p>
+<%= form_tag :action => 'create' do %>
+	
+	<% for @q in @nonsticky_a_questions %>
+	question id: <%= @q.id %>
+		<%= fields_for "q[]" do |f| %>
+		<div id="demo-frame">
+			<%= image_tag @q.ref_picture %>
+			<%= image_tag @q.other_picture %>
+			<%= hidden_field_tag "q[#{@q.id}][resemblance]" %>
+			<div class="slider" data-ref="<%= @q.id %>" id="slider_<%= @q.id %>"></div>
+			<script type="text/javascript">
+				$( ".slider" ).slider({
+					change: function(event, ui) {
+						var ref = $(ui.handle).parent().data('ref');
+						$('#q_' + ref + '_resemblance').val(ui.value);
+					}
+				});
+			</script>
+		<% end %>
+		</div>
+	<% end %>
+	
+	<p>
+		<%= submit_tag 'Create' %>
+	</p>
+<% end %>

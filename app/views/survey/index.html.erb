@@ -1,0 +1,8 @@
+<h1>Survey#index</h1>
+<p>Find me in app/views/survey/index.html.erb</p>
+<% @surveys.each do |s| %>
+	<p>sample survey</p>
+<% end %>
+<% @a_questions.each do |q| %>
+	<p>sample q: ref <%= q.ref_pic %>, other <%= q.other_pic %></p>
+<% end %>

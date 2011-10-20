@@ -1,4 +1,46 @@
 PisiSurvey::Application.routes.draw do
+  get "type_a_question/index"
+
+  get "type_a_question/new"
+
+  get "type_a_question/create"
+
+  get "type_a_question/edit"
+
+  get "type_a_question/update"
+
+  get "type_a_question/destroy"
+
+  get "survey/index"
+  get "survey/new"
+  post "survey/create"
+  
+  get "question/index"
+
+  get "question/new"
+
+  get "question/create"
+
+  get "question/edit"
+
+  get "question/update"
+
+  get "question/destroy"
+
+  get "questions/index"
+
+  get "questions/new"
+
+  get "questions/create"
+
+  get "questions/edit"
+
+  get "questions/update"
+
+  get "questions/destroy"
+
+  get "home/index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +90,7 @@ PisiSurvey::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'home#index'
 
   # See how all your routes lay out with "rake routes"
 
