@@ -1,0 +1,26 @@
+<h1>Survey#newc</h1>
+<p>Find me in app/views/survey/newc.html.erb</p>
+<%= form_tag :action => 'create' do %>
+	<% for @field in @survey.additional_fields %>
+		<%= hidden_field_tag "additional[#{@field[0]}]", @field[1] %>
+	<% end %>
+	<%= hidden_field_tag 'survey_id', @survey.id %>
+	<%= hidden_field_tag 'survey_part', @survey.part %>
+	
+	<% for @qc in @nonsticky_c_questions %>
+		question id: <%= @qc.id %>
+		<%= fields_for "qc[]" do |f| %>
+			<%= image_tag @qc.ref_picture %>
+			<input type="radio" name="qc[<%= @qc.id %>][resemblance]" value="0" /> Okrągły<br />
+			<input type="radio" name="qc[<%= @qc.id %>][resemblance]" value="1" /> Wydłużony<br />
+			<input type="radio" name="qc[<%= @qc.id %>][resemblance]" value="2" /> Nerka<br />
+			<input type="radio" name="qc[<%= @qc.id %>][resemblance]" value="3" /> Grucha<br />
+			<input type="radio" name="qc[<%= @qc.id %>][resemblance]" value="4" /> Inny<br />
+		<% end %>
+		<br />
+	<% end %>
+	
+	<p>
+		<%= submit_tag 'Create' %>
+	</p>
+<% end %>

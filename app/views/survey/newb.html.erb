@@ -1,0 +1,39 @@
+<h1>Survey#newb</h1>
+<p>Find me in app/views/survey/newb.html.erb</p>
+<%= form_tag :action => 'create' do %>
+	<% for @field in @survey.additional_fields %>
+		<%= hidden_field_tag "additional[#{@field[0]}]", @field[1] %>
+	<% end %>
+	<%= hidden_field_tag 'survey_id', @survey.id %>
+	<%= hidden_field_tag 'survey_part', @survey.part %>
+	
+	<% for @qb in @nonsticky_b_questions %>
+		question id: <%= @qb.id %>
+		<%= fields_for "qb[]" do |f| %>
+			<div class="slider_pear" data-ref="<%= @qb.id %>" id="slider_<%= @qb.id %>"></div>
+			<%= image_tag @qb.ref_picture %>
+			<%= hidden_field_tag "qb[#{@qb.id}][resemblance_pear]", 0 %>
+			<%= hidden_field_tag "qb[#{@qb.id}][resemblance_kidney]", 0 %>
+			<div class="slider_kidney" data-ref="<%= @qb.id %>" id="slider_<%= @qb.id %>"></div>
+		<% end %>
+		<br />
+	<% end %>
+	
+	<p>
+		<%= submit_tag 'Create' %>
+	</p>
+<% end %>
+<script type="text/javascript">
+	$( ".slider_pear" ).slider({
+		change: function(event, ui) {
+			var ref = $(ui.handle).parent().data('ref');
+			$('#qb_' + ref + '_resemblance_pear').val(ui.value);
+		}
+	});
+	$( ".slider_kidney" ).slider({
+		change: function(event, ui) {
+			var ref = $(ui.handle).parent().data('ref');
+			$('#qb_' + ref + '_resemblance_kidney').val(ui.value);
+		}
+	});
+</script>
