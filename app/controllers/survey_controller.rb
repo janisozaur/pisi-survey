@@ -29,10 +29,7 @@ class SurveyController < ApplicationController
     logger.info "survey: " + @survey.inspect
     if params[:survey_part] == "a"
       params[:qa].each do |question|
-        @answer = TypeAAnswer.new(:survey_id => params[:survey_id], :question_id => question[0], :value => question[1]["resemblance"])
-        @survey.additional_fields["a" + @answer.question_id.to_s] = question[1]["resemblance"]
-        logger.info question.inspect
-        logger.info @answer.inspect
+        @survey.additional_fields["a" + question[0].to_s] = question[1]["resemblance"]
       end
       @survey.part = "b"
       @sticky_b_questions = TypeBQuestion.find_all_by_sticky(true)
@@ -41,10 +38,7 @@ class SurveyController < ApplicationController
     elsif params[:survey_part] == "b"
       @survey.additional_fields = params[:additional]
       params[:qb].each do |question|
-        @answer = TypeBAnswer.new(:survey_id => params[:survey_id], :question_id => question[0], :value_pear => question[1]["resemblance_pear"], :value_kidney => question[1]["resemblance_kidney"])
-        @survey.additional_fields["b" + @answer.question_id.to_s] = question[1]["resemblance_pear"] + "," + question[1]["resemblance_kidney"]
-        logger.info question.inspect
-        logger.info @answer.inspect
+        @survey.additional_fields["b" + question[0].to_s] = question[1]["resemblance_pear"] + "," + question[1]["resemblance_kidney"]
       end
       @survey.part = "c"
       @sticky_c_questions = TypeCQuestion.find_all_by_sticky(true)
@@ -53,10 +47,7 @@ class SurveyController < ApplicationController
     elsif params[:survey_part] == "c"
       @survey.additional_fields = params[:additional]
       params[:qc].each do |question|
-        @answer = TypeCAnswer.new(:survey_id => params[:survey_id], :question_id => question[0], :value => question[1]["resemblance"])
-        @survey.additional_fields["c" + @answer.question_id.to_s] = question[1]["resemblance"]
-        logger.info question.inspect
-        logger.info @answer.inspect
+        @survey.additional_fields["c" + question[0].to_s] = question[1]["resemblance"]
       end
       
       @survey.additional_fields.each do |field|
