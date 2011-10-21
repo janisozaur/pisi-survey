@@ -4,6 +4,6 @@ class TypeAQuestion < ActiveRecord::Base
   end
   
   def other_picture
-      "%05d.png" % other_pic
-    end
+    "%05d.png" % other_pic
+  end
 end
